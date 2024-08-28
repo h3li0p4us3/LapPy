@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LapPy - File upload and Keyboard Input</title>
+</head>
+<body>
+    <h1>File Upload and Keyboard Input</h1>
+    <form id="fileUploadForm" method="POST" enctype="multipart/form-data" action="/upload">
+        <input type="file" name="file" accept=".txt,.pdf,.jpg,.png">
+        <input type="submit" value="Upload File">
+    </form>
+    
+    <div id="keyboardInput">
+        <textarea rows="4" cols="50"></textarea>
+        <button onclick="sendText()">Send Text</button>
+    </div>
+    <script>
+        function sendText() {
+            const formData = new FormData();
+            formData.append("text", document.querySelector('#keyboardInput textarea').value);
+        
+            fetch('/send-text', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => alert('Text sent successfully.'))
+            .catch(error => console.error('Error sending text:', error));
+        }
+        </script>
+</body>
+</html>
