@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify, send_file, render_template
-import subprocess
+import pyperclip
 import os
 
 app = Flask(__name__, template_folder='front')
@@ -21,11 +21,10 @@ def send_text():
 
 
 def savetoClipboard(text):
-    command = ["wl-copy", " "] # use wl-copy command for adding the text to clipboard. (should be different on other systems)
     try:
-        subprocess.run(command + [text], check=True)
+        pyperclip.copy(text)
         print(f"Text '{text}' saved to clipboard")
-    except subprocess.CalledProcessError as e:
+    except pyperclip.get_errno as e:
         print(f"Failed to save text to clipboard: {e}")
 
 @app.route('/upload', methods=['POST'])
