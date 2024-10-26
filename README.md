@@ -4,7 +4,7 @@ LapPy is a simple web application built with Python and Flask. It provides a use
 
 ## Installation
 
-To run LapPy, you need to install Flask:
+To run LapPy, you need to install Flask and pyperclip:
 
 ```bash
 pip3 install flask pyperclip
